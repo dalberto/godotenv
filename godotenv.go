@@ -45,7 +45,7 @@ func Load(skipMissing bool, filenames ...string) (err error) {
 	for _, filename := range filenames {
 		err = loadFile(filename)
 
-		if skipMissing && (err == os.ErrNotExist || err == os.ErrPermission) {
+		if skipMissing && (os.IsNotExist(err) || os.IsPermission(err)) {
 			continue
 		}
 
